@@ -69,6 +69,18 @@ func SetOfWords2Vec(vocabList []string, inputSet []string) (returnVec []int) {
     return returnVec
 }
 
+func BagOfWords2VecMN(vocabList []string, inputSet []string)(returnVec []int) {
+    returnVec = make([]int, len(vocabList))
+    for _, word := range inputSet {
+        pos := lookupWord(vocabList, word)
+        if pos >= 0 {
+            returnVec[pos] += 1
+        }
+    }
+    
+    return
+}
+
 func TrainNB0(trainMatrix [][]int, trainCategory []int)([]float64, []float64, float64) {
     numTrainDocs := len(trainMatrix)
     numWords := len(trainMatrix[0])
