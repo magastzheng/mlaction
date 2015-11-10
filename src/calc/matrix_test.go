@@ -20,3 +20,9 @@ func Test_MultipyMatrixInt(t *testing.T) {
     result := calc.MultipyMatrixInt(a, b)
     fmt.Println(result)
 }
+
+func Test_TransposeMatrixInt(t *testing.T) {
+    a := [][]int{{1, 1, 1}, {2, 2, 2}, {3, 3, 3}, {4, 4, 4}}
+    result := calc.TransposeMatrixInt(a)
+    fmt.Println(result)
+}

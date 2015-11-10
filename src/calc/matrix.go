@@ -23,6 +23,10 @@ func AddMatrixInt(a [][]int, b [][]int) (c [][]int) {
 
 func MultipyMatrixInt(a [][]int, b [][]int)(c [][]int) {
     arow, brow := len(a), len(b)
+    if arow == 0 || brow == 0 {
+        panic("Cannot multipy empty matrix")
+    }
+
     acol, bcol := len(a[0]), len(b[0])
     if acol != brow{
         panic("Two wrong size matrix to multipy")
@@ -47,4 +51,21 @@ func MultipyMatrixInt(a [][]int, b [][]int)(c [][]int) {
     return
 }
 
+func TransposeMatrixInt(a [][]int)(c [][]int){
+    row := len(a)
+    if row == 0 {
+        panic("Cannot transpose empty matrix")
+    }
+    col := len(a[0])
+    c = make([][]int, col)
+    for i := 0; i < col; i++ {
+        rows := make([]int, row)
+        for j := 0; j < row; j++ {
+            rows[j] = a[j][i]
+        }
+        c[i] = rows
+    }
+
+    return
+}
 
