@@ -4,6 +4,11 @@ import (
     //"fmt"
 )
 
+func GetSize(matrix [][]float64)(row, col int) {
+    row = len(matrix)
+    col = len(matrix[0])
+    return
+}
 
 //Calculate the |A| expand the first row
 //determinant
