@@ -9,7 +9,7 @@ import (
     "strconv"
 )
 
-func LoadDataSet(filename string) ([][]float64, []int) {
+func LoadDataSet(filename string) ([][]float64, []float64) {
     file, err := os.Open(filename)
     if err != nil {
         panic("Cannot open file: " + filename)
@@ -17,7 +17,7 @@ func LoadDataSet(filename string) ([][]float64, []int) {
     defer file.Close()
     
     dataSet := make([][]float64, 0)
-    labels := make([]int, 0)
+    labels := make([]float64, 0)
     
     scanner := bufio.NewScanner(file)
     for scanner.Scan() {
@@ -27,19 +27,15 @@ func LoadDataSet(filename string) ([][]float64, []int) {
         dataRow := make([]float64, 0)
         for i, count := 0, len(column); i < count; i++ {
             v := column[i]
-            if i == count - 1 {
-                if label, err := strconv.ParseInt(v, 10, 32); err == nil {
-                    labels = append(labels, int(label))
-                } else {
-                    panic(err)
-                }
-            } else {
-                if value, err := strconv.ParseFloat(v, 64); err == nil {
+            if value, err := strconv.ParseFloat(v, 64); err == nil {
+                if i < count - 1 {
                     dataRow = append(dataRow, value)
                 }else{
-                    fmt.Println("Cannot convert float64: ", v)
-                    panic(err)
+                    labels = append(labels, value)
                 }
+            }else{
+                fmt.Println("Cannot convert float64: ", v)
+                panic(err)
             }
         }
 
