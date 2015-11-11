@@ -16,3 +16,5 @@ func Test_CalcRoot(t *testing.T){
 
     fmt.Println(math.Pow(3.02906, 5.0))
 }
+
+
