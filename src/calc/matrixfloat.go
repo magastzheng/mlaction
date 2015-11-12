@@ -58,7 +58,12 @@ func getA(arcs [][]float64, n int)float64{
 //    
 //}
 
-type Vector struct {
+type Vector interface {
+    Len() int
+    At(i int)float64
+}
+
+type VectorFloat struct {
     len int
     data []float64
 }
@@ -77,15 +82,15 @@ type FloatMatrix struct {
     data [][]float64
 }
 
-func (vec *Vector) Len() int {
+func (vec *VectorFloat) Len() int {
     return vec.len
 }
 
-func (vec *Vector) Data() []float64 {
+func (vec *VectorFloat) Data() []float64 {
     return vec.data
 }
 
-func (vec *Vector) At(i int) float64 {
+func (vec *VectorFloat) At(i int) float64 {
     if i >= vec.len || i < 0 {
         panic("The index is beyond the size of vector")
     }
@@ -93,8 +98,8 @@ func (vec *Vector) At(i int) float64 {
     return vec.data[i]
 }
 
-func NewVector(a []float64) *Vector {
-    return &Vector{
+func NewVectorFloat(a []float64) Vector {
+    return &VectorFloat{
         len: len(a),
         data: a,
     }
@@ -137,7 +142,7 @@ func (fm *FloatMatrix) Row(i int) Vector {
         panic("The index is beyond the matrix row")
     }
 
-    v := Vector{
+    v := &VectorFloat{
         len: fm.cols,
         data: fm.data[i],
     }
@@ -150,7 +155,7 @@ func (fm *FloatMatrix) Column(i int) Vector {
         panic("The index is beyond the matrix column")
     }
 
-    v := Vector{
+    v := &VectorFloat{
         len: fm.rows,
         data: make([]float64, fm.rows),
     }
@@ -236,7 +241,7 @@ func MultipyVec(a Matrix, b Vector) Vector {
         }
     }
 
-    res := NewVector(c)
+    res := NewVectorFloat(c)
 
-    return *res
+    return res
 }

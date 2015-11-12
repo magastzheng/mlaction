@@ -70,9 +70,9 @@ func Test_MatrixFloat_MultipyVec(t *testing.T){
     a := [][]float64{{1.2, 1.3}, {2.3, 4.5}, {3.5, 7.8}}
     b := []float64{2.1, 1.2}
     m1 := calc.NewFloatMatrix(a)
-    v1 := calc.NewVector(b)
+    v1 := calc.NewVectorFloat(b)
     fmt.Println(m1, v1)
     
-    v2 := calc.MultipyVec(m1, *v1)
+    v2 := calc.MultipyVec(m1, v1)
     fmt.Println(v2)
 }
