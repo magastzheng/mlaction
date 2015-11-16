@@ -167,6 +167,23 @@ func (fm *FloatMatrix) Column(i int) Vector {
     return v
 }
 
+func (fm *FloatMatrix) Multipy(a float64) Matrix {
+    m := new(FloatMatrix)
+    m.data = make([][]float64, fm.rows)
+    for i := 0; i < fm.rows; i++ {
+        row := make([]float64, fm.cols)
+        for j := 0; j < fm.cols; j++ {
+            row[j] = a * fm.data[i][j]
+        }
+        m.data[i] = row
+    }
+    
+    m.rows = fm.rows
+    m.cols = fm.cols
+
+    return m
+}
+
 func NewFloatMatrix(a [][]float64)(*FloatMatrix){
     return &FloatMatrix{
         rows: len(a),

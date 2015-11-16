@@ -43,6 +43,12 @@ func Test_MatrixFloat_RowCol(t *testing.T){
     fmt.Println(col1)
 }
 
+func Test_MatrixFloat_MultipyNum(t *testing.T) {
+    a := [][]float64{{1.0, 2.0, 3.0}, {4.0, 5.0, 6.1}}
+    m := calc.NewFloatMatrix(a)
+    m1 := m.Multipy(2.0)
+    fmt.Println(m1)
+}
 
 func Test_MatrixFloat_Add(t *testing.T){
     a := [][]float64{{1.2, 1.3}, {2.3, 4.5}, {3.5, 7.8}}
